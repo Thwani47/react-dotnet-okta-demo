@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Okta.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -59,7 +60,7 @@ var summaries = new[]
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
 
-app.MapGet("/weatherforecast", [Authorize] () =>
+app.MapGet("/weatherforecast", [Authorize][EnableCors("AllowAll")] () =>
 {
     var forecast = Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast
@@ -74,7 +75,7 @@ app.MapGet("/weatherforecast", [Authorize] () =>
 .WithName("GetWeatherForecast")
 .WithOpenApi();
 
-app.MapGet("/whoami", [Authorize] (HttpContext httpContext) =>
+app.MapGet("/whoami", [Authorize][EnableCors("AllowAll")] (HttpContext httpContext) =>
 {
     var principal = httpContext.User.Identity as ClaimsIdentity;
 
@@ -82,7 +83,7 @@ app.MapGet("/whoami", [Authorize] (HttpContext httpContext) =>
     .ToDictionary(claim => claim.Key, claim => claim.First().Value);
 });
 
-app.MapGet("/hello", [AllowAnonymous] () => "You are anonymous");
+app.MapGet("/hello", [AllowAnonymous][EnableCors("AllowAll")] () => new { message = "This is from a public endpoint! 😃" });
 
 app.Run();
 
