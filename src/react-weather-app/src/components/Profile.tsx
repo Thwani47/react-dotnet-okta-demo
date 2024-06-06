@@ -30,8 +30,6 @@ export default function Profile() {
             <p>Preferred Username: {userInfo.preferred_username}</p>
 
             <button className="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-500 font-medium rounded-lg text-md px-5 py-2.5 mb-2 dark:bg-green-500 dark:hover:bg-green-600 focus:outline-none dark:focus:ring-green-600" onClick={() => navigate('/')}>Home</button>
-
-
             <table>
                 <thead>
                     <tr>

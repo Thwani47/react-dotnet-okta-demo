@@ -12,6 +12,7 @@ export default function Home() {
     const logout = async () => {
         await oktaAuth.signOut()
     }
+    
     return (
         <div className="space-y-2">
             <h1>React Weather App</h1>
