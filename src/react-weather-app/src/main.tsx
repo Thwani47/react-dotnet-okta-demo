@@ -26,6 +26,7 @@ const router = createBrowserRouter([
 const oktaAuth = new OktaAuth({
   issuer: `${import.meta.env.VITE_OKTA_ISSUER}/oauth2/default`,
   clientId: `${import.meta.env.VITE_OKTA_CLIENT_ID}`,
+  scopes: ['openid', 'profile', 'email'],
   redirectUri: window.location.origin + '/login/callback'
 })
 
